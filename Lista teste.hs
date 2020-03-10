@@ -29,7 +29,6 @@ removeUm x
  | x == 0 = [x]
  | mod x 10 == 1 = (mod x 10 ) - (1) + removeUm (x `div` 10)
  | otherwise = x + removeUm (x `div` 10)
-
 limpaUm :: [Int] -> [Int]
 limpaUm [] = []
 limpaUm (x:xs) = (removeUm x) ++ (limpaUm xs)
@@ -82,3 +81,15 @@ repete c n = c : repete c (n-1)
 
 isReplica :: String -> Int -> Char -> Bool
 isReplica xs n c = xs == (repete c n)
+
+------ Questão 8 -----------
+
+solve :: Char -> [(Char, Char)] -> Char
+solve _ [] = error "LETRA NAO ESTA NA LISTA DE TUPLAS"
+solve x (y:ys)
+ | x == fst y = snd y
+ | otherwise = solve x ys
+
+decEnigma :: String -> [(Char, Char)] -> String
+decEnigma [] _ = []
+decEnigma (x:xs) ys = solve x ys : decEnigma xs ys
