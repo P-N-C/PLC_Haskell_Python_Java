@@ -1,13 +1,11 @@
-bb :: Int -> Int -> Int
-bb n 0 = 0
-bb n s
-  | s`mod`10 == 0 = bb (n+1) (s`div`10)
-  | otherwise = (2^n) + (bb (n+1) (s`div`10))
-
-btoi :: String -> Int
-btoi s = bb 0 (read s::Int)
+solve :: Int-> [Char]
+solve cp
+  | (f+s)^2 == cp = "Charmander vitorioso"
+  | otherwise = "Charmander derrotado"
+  where
+    f = ((cp `div` 1000) `mod` 10)*10 + ((cp `div` 100) `mod` 10)
+    s = ((cp `div` 10) `mod` 10)*10 + (cp `mod` 10)
 
 main = do
-    s <- getLine
-    let result = btoi s
-    print result
+  cp <- readLn
+  putStr (solve cp)
